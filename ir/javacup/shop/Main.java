@@ -7,7 +7,7 @@ import java.util.Optional;
 public class Main {
     public static void main(String[] args) {
 
-        Product product  =new Product ("100","nike",120000000,ProductState.AVAILABLE,ProductType.NORMAL);
+        Product product  =new Product ("100","nike",120000000,ProductState.AVAILABLE,ProductType.BREAKABLE);
         Product product1 =new Product("101","nike",1300000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product2 =new Product("105","nike",140000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product3 =new Product("104","nike",1200000,ProductState.AVAILABLE,ProductType.NORMAL);
@@ -33,7 +33,10 @@ public class Main {
 
         System.out.println(orderFunctionUtil.isReadyToDeliver().apply(order));
 
+
         System.out.println(orderFunctionUtil.hasPerishableProduct().apply(order));
+
+        System.out.println(orderFunctionUtil.hasExpensiveBreakableProduct().apply(order));
 
 
     }
