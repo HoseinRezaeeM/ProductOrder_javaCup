@@ -47,7 +47,14 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> isReadyToDeliver() {
-        return null;
+        Function<Order,Boolean> function =(a)->{
+            if(a.getProducts().stream().map(Product::getState).
+                    allMatch(productState -> productState.equals(ProductState.AVAILABLE)) && a.getState().equals(OrderState.READY_TO_SEND)){
+                return true;
+            }
+            return false;
+        };
+        return function;
     }
 
     @Override
