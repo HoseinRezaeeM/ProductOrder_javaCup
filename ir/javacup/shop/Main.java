@@ -12,7 +12,7 @@ public class Main {
         Product product2 =new Product("105","nike",140000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product3 =new Product("104","nike",1200000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product4 =new Product("102","nike",150000,ProductState.AVAILABLE,ProductType.NORMAL);
-        Product product5 =new Product("108","nike",1300000,ProductState.AVAILABLE,ProductType.NORMAL);
+        Product product5 =new Product("108","nike",1300000,ProductState.AVAILABLE,ProductType.PERISHABLE);
         List<Product> list = Arrays.asList(product,product1,product2,product3,product4,product5);;
         final Optional<Long> reduce = list.stream().map(Product::getPrice).reduce(Long::sum);
 
@@ -32,6 +32,8 @@ public class Main {
 
 
         System.out.println(orderFunctionUtil.isReadyToDeliver().apply(order));
+
+        System.out.println(orderFunctionUtil.hasPerishableProduct().apply(order));
 
 
     }
