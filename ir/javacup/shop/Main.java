@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Product product  =new Product ("100","nike",120000000,ProductState.AVAILABLE,ProductType.NORMAL);
-        Product product1 =new Product("101","nike",1300000,ProductState.UNAVAILABLE,ProductType.NORMAL);
+        Product product1 =new Product("101","nike",1300000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product2 =new Product("105","nike",140000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product3 =new Product("104","nike",1200000,ProductState.AVAILABLE,ProductType.NORMAL);
         Product product4 =new Product("102","nike",150000,ProductState.AVAILABLE,ProductType.NORMAL);
@@ -18,7 +18,7 @@ public class Main {
 
 
 
-        Order order =new Order("100", reduce.get(),"Samyar",OrderState.READY_TO_SEND,list);
+        Order order =new Order("120", reduce.get(),"Samyar",OrderState.READY_TO_SEND,list);
         OrderFunctionUtil orderFunctionUtil =new OrderFunctionUtilImpl();
 
 
@@ -29,6 +29,9 @@ public class Main {
 
 
         System.out.println(orderFunctionUtil.hasUnavailableProduct().apply(order));
+
+
+        System.out.println(orderFunctionUtil.isReadyToDeliver().apply(order));
 
 
     }
