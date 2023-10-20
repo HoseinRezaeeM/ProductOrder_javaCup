@@ -1,6 +1,7 @@
 package ir.javacup.shop;
 
 import java.util.function.Function;
+
 @SuppressWarnings("unused")
 public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
@@ -8,10 +9,10 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
     @Override
     public Function<Order, Boolean> isBigOrder() {
 
-        Function<Order,Boolean> function = order -> {
-            if (order.getPrice()>10000000){
-                 return true;}
-            else
+        Function<Order, Boolean> function = order -> {
+            if (order.getPrice() > 10000000) {
+                return true;
+            } else
                 return false;
         };
 
@@ -21,8 +22,8 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
     @Override
     public Function<Order, Boolean> hasMultipleProducts() {
 
-        Function<Order,Boolean> function =order -> {
-            if((long) order.getProducts().size() >1){
+        Function<Order, Boolean> function = order -> {
+            if ((long) order.getProducts().size() > 1) {
                 return true;
             }
             return false;
@@ -32,11 +33,14 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> hasUnavailableProduct() {
-        Function<Order,Boolean> orderBooleanFunction =p -> {
-            if(p.getState().equals(ProductState.UNAVAILABLE)){
+        Function<Order, Boolean> orderBooleanFunction = (q) -> {
+            if (q.getProducts().stream().map(Product::getState).
+                    anyMatch((p -> p.equals(ProductState.UNAVAILABLE))))
+            {
                 return true;
             }
             return false;
+
         };
         return orderBooleanFunction;
     }
