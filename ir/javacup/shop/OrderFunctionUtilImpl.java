@@ -59,7 +59,13 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> hasPerishableProduct() {
-        return null;
+        Function<Order,Boolean> function =(a)->{
+            if(a.getProducts().stream().map(Product::getType).anyMatch(productType -> productType.equals(ProductType.PERISHABLE))){
+                return true;
+            }
+            return false;
+        };
+        return function;
     }
 
     @Override
