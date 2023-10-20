@@ -35,8 +35,7 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
     public Function<Order, Boolean> hasUnavailableProduct() {
         Function<Order, Boolean> orderBooleanFunction = (q) -> {
             if (q.getProducts().stream().map(Product::getState).
-                    anyMatch((p -> p.equals(ProductState.UNAVAILABLE))))
-            {
+                    anyMatch((p -> p.equals(ProductState.UNAVAILABLE)))) {
                 return true;
             }
             return false;
@@ -47,9 +46,9 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> isReadyToDeliver() {
-        Function<Order,Boolean> function =(a)->{
-            if(a.getProducts().stream().map(Product::getState).
-                    allMatch(productState -> productState.equals(ProductState.AVAILABLE)) && a.getState().equals(OrderState.READY_TO_SEND)){
+        Function<Order, Boolean> function = (a) -> {
+            if (a.getProducts().stream().map(Product::getState).
+                    allMatch(productState -> productState.equals(ProductState.AVAILABLE)) && a.getState().equals(OrderState.READY_TO_SEND)) {
                 return true;
             }
             return false;
@@ -59,8 +58,8 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> hasPerishableProduct() {
-        Function<Order,Boolean> function =(a)->{
-            if(a.getProducts().stream().map(Product::getType).anyMatch(productType -> productType.equals(ProductType.PERISHABLE))){
+        Function<Order, Boolean> function = (a) -> {
+            if (a.getProducts().stream().map(Product::getType).anyMatch(productType -> productType.equals(ProductType.PERISHABLE))) {
                 return true;
             }
             return false;
@@ -70,6 +69,15 @@ public class OrderFunctionUtilImpl implements OrderFunctionUtil {
 
     @Override
     public Function<Order, Boolean> hasExpensiveBreakableProduct() {
-        return null;
+        Function<Order, Boolean> booleanFunction = (a) ->{
+            if(a.getProducts().stream().map(Product::getPrice).
+                    anyMatch(price->price.intValue()>5000000)&&
+                    a.getProducts().stream().map(Product::getType).
+                            anyMatch(productType -> productType.equals(ProductType.BREAKABLE))){
+                return true;
+            }
+            return false;
+        };
+        return booleanFunction;
     }
 }
